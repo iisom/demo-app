@@ -1,0 +1,111 @@
+css
+/* Toggle Switch Styles */
+.toggle-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  border-radius: 50%;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.slider::after {
+  content: 'Light';
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  color: #000;
+  font-size: 12px;
+}
+
+input:checked + .slider::after {
+  content: 'Dark';
+  left: auto;
+  right: 8px;
+  color: #fff;
+}
+
+/* Light Mode Styles */
+body.light-mode {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+  body.dark-mode {
+    background-color: #464545;
+    color: #e0e0e0;
+  }
+
+  app.js 
+  function App() {
+    const [isDarkMode, setIsDarkMode] = useState(() => {
+      const savedTheme = localStorage.getItem('theme');
+      return savedTheme === 'dark';
+    });
+  
+    useEffect(() => {
+      document.body.classList.toggle('dark-mode', isDarkMode);
+      document.body.classList.toggle('light-mode', !isDarkMode);
+      localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    }, [isDarkMode]);
+  
+    const handleToggle = () => setIsDarkMode(prevMode => !prevMode);
+  
+    return (
+      <div className="container-fluid">
+        <BrowsingHub />
+        
+        {/* Toggle Switch for Dark Mode */}
+        <div className="toggle-container position-fixed bottom-0 end-0 p-3">
+          <label className="switch">
+            <input type="checkbox" checked={isDarkMode} onChange={handleToggle} />
+            <span className="slider round"></span>
+          </label>
+        </div>
+        );
+    }
+    
+    export default App;

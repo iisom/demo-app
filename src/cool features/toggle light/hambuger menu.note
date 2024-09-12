@@ -1,0 +1,90 @@
+app.js
+
+ import React, { useState } from 'react';
+import './App.css'; 
+
+function App() {
+  const [menuVisible, setMenuVisible] = useState(false);
+
+  const toggleMenu = () => {
+    console.log('Menu toggle clicked');
+    setMenuVisible(prev => !prev);
+  };
+
+  return (
+    <div>
+      <div className="menu-container">
+        <div className="hamburger" onClick={toggleMenu}>
+          <div className="line"></div>
+          <div className="line"></div>
+          <div className="line"></div>
+        </div>
+        <div id="dropdown-menu" className={`dropdown-menu ${menuVisible ? 'show' : ''}`}>
+          <a href="https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_mobile_navbar">Change Orientation</a>
+          <a href="https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_mobile_navbar">Save Code</a>
+          <a href="https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_mobile_navbar">Change Theme, Dark/Light</a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+app.css
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .menu-container {
+    position: relative;
+  }
+  
+  .hamburger {
+    cursor: pointer;
+    width: 30px;
+    height: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .line {
+    height: 4px;
+    background-color: #333;
+    border-radius: 2px;
+  }
+  
+  .dropdown-menu {
+    display: none; /* Ensure dropdown is hidden by default */
+    position: absolute;
+    top: 35px;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .dropdown-menu.show {
+    display: block; /* Show dropdown when 'show' class is applied */
+  }
+  
+  .dropdown-menu a {
+    display: block;
+    padding: 10px 20px;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .dropdown-menu a:hover {
+    background-color: #f1f1f1;
+  }
+  
